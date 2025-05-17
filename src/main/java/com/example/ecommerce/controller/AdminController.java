@@ -1,7 +1,7 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.model.Product;
-import com.example.ecommerce.service.ProductService;
+import com.example.ecommerce.service.AdminOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,38 +11,42 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private final AdminOperations adminOperations;
+
     @Autowired
-    private ProductService productService;
+    public AdminController(AdminOperations adminOperations) {
+        this.adminOperations = adminOperations;
+    }
 
     @PostMapping("/add")
-    public String addProduct(@RequestParam String user, @RequestBody Product product) {
+    public String add(@RequestParam String user, @RequestBody Product product) {
         if (!user.equals("admin")) {
-            return "Only admin can access this field";
+            return "Only admin has access to this field!";
         }
-        productService.addProduct(product);
-        return "The product has been successfully added";
+        adminOperations.addProduct(product);
+        return "Product added successfully";
     }
 
     @PutMapping("/update/{name}")
-    public String updateProduct(@RequestParam String user, @PathVariable String name, @RequestBody Product product) {
+    public String update(@RequestParam String user, @PathVariable String name, @RequestBody Product product) {
         if (!user.equals("admin")) {
-            return "Only admin can access this field";
+            return "Only admin has access to this field!";
         }
-        productService.updateProduct(name, product);
-        return "The product has been successfully updated";
+        adminOperations.updateProduct(name, product);
+        return "Product updated successfully";
     }
 
     @DeleteMapping("/delete/{name}")
-    public String deleteProduct(@RequestParam String user, @PathVariable String name) {
+    public String delete(@RequestParam String user, @PathVariable String name) {
         if (!user.equals("admin")) {
-            return "Only admin can access this field";
+            return "Only admin has access to this field!";
         }
-        productService.deleteProduct(name);
-        return "The product has been successfully deleted";
+        adminOperations.deleteProduct(name);
+        return "Product deleted successfully";
     }
 
     @GetMapping("/products")
-    public List<Product> getProducts() {
-        return productService.getAllProducts();
+    public List<Product> list() {
+        return adminOperations.getAllProducts();
     }
 }

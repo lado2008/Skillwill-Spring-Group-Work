@@ -3,22 +3,22 @@ package com.example.ecommerce.model;
 public class Product {
     private String name;
     private double price;
-    private int sale;
+    private int stock;
 
     public Product() {};
 
-    public Product(String name, double price, int sale) {
+    public Product(String name, double price, int stock) {
         this.name = name;
         this.price = price;
-        this.sale = sale;
+        this.stock = stock;
     }
     //Getters
     public String getName() { return name; }
     public double getPrice() { return price; }
-    public int getSale() { return sale; }
+    public int getStock() { return stock; }
 
     //Setter
     public void setName(String name) { this.name = name; }
     public void setPrice(double price) { this.price = price; }
-    public void setSale(int sale) { this.sale = sale; }
+    public void setStock(int stock) { this.stock = stock; }
 }

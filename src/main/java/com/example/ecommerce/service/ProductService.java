@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class ProductService {
+public class ProductService implements AdminOperations {
     private final Map<String, Product> productMap = new HashMap<>();
 
     public List<Product> getAllProducts() {
